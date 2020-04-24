@@ -1,0 +1,21 @@
+﻿<div>
+  <h3>Клиенты</h3>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <td>Имя</td>
+        <td>Фамилия</td>
+        <td>Дата рождения</td>
+        <td>Номер водительского удостоверения</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{user?.name}}</td>
+        <td>{{user?.lastName}}</td>
+        <td>{{user?.dateBirthday| date}}</td>
+        <td>{{user?.numberLicense}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

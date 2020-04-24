@@ -15,17 +15,30 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="3.1.3" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="ClientApp\src\app\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="ClientApp\src\app\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\**" />
     <None Remove="$(SpaRoot)**" />
+    <None Remove="ClientApp\src\app\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <None Remove="ClientApp\src\app\model\car.js" />
+    <None Remove="ClientApp\src\app\model\car.js.map" />
+    <None Remove="ClientApp\src\app\model\order.js" />
+    <None Remove="ClientApp\src\app\model\order.js.map" />
+    <None Remove="ClientApp\src\app\model\user.js" />
+    <None Remove="ClientApp\src\app\model\user.js.map" />
   </ItemGroup>
 
   <ItemGroup>

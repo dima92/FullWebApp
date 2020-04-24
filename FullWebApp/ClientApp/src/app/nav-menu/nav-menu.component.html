@@ -1,32 +1,30 @@
-<header>
-  <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-    <div class="container">
-      <a class="navbar-brand" [routerLink]="['/']">FullWebApp</a>
-      <button class="navbar-toggler"
-              type="button"
-              data-toggle="collapse"
-              data-target=".navbar-collapse"
-              aria-label="Toggle navigation"
-              [attr.aria-expanded]="isExpanded"
-              (click)="toggle()">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
-           [ngClass]="{ show: isExpanded }">
-        <ul class="navbar-nav flex-grow">
-          <li class="nav-item"
-              [routerLinkActive]="['link-active']"
-              [routerLinkActiveOptions]="{ exact: true }">
-            <a class="nav-link text-dark" [routerLink]="['/users']">Пользователи</a>
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/cars']">Автомобили</a>
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/orders']">Заказы</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-</header>
+<div class='main-nav'>
+    <nav class='navbar navbar-expand-lg navbar-dark bg-dark d-flex flex-column'>
+        <div class="navbar-header p-0">
+            <a class='navbar-brand' [routerLink]='["/"]'>Заказы</a>
+            <button type='button' class='navbar-toggler' data-toggle='collapse' data-target='#navbarNav' [attr.aria-expanded]='isExpanded' (click)='toggle()'>
+                <span class='sr-only'>Toggle navigation</span>
+                <span class='navbar-toggler-icon'></span>
+            </button>
+            <div id="navbarNav" class='navbar-collapse collapse p-0' [ngClass]='{ "in": isExpanded }'>
+                <ul class='nav navbar-nav flex-column'>
+                    <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
+                        <a [routerLink]='["/"]' class="nav-link" (click)='collapse()'>
+                            Заказы
+                        </a>
+                    </li>
+                    <li class="nav-item" [routerLinkActive]='["link-active"]'>
+                        <a [routerLink]='["/user"]' class="nav-link" (click)='collapse()'>
+                            Клиенты
+                        </a>
+                    </li>
+                    <li class="nav-item" [routerLinkActive]='["link-active"]'>
+                        <a [routerLink]='["/car"]' class="nav-link" (click)='collapse()'>
+                            Автомобили
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using BLL.Interface;
 using BLL.ModelDto;
@@ -23,27 +24,45 @@ namespace BLL.Repository
 
         public List<UserDto> GetAll()
         {
-            throw new System.NotImplementedException();
+            List<UserDto> result = new List<UserDto>();
+            var allUsers = _dalFactory.User.GetAll().Include(ord => ord.Order).ToList();
+            foreach (var user in allUsers)
+            {
+                result.Add(new UserDto
+                {
+                    Id = user.Id,
+                    Name = user.Name,
+                    LastName = user.LastName,
+                    DateBirthday = user.DateBirthday,
+                    NumberLicense = user.NumberLicense
+                });
+            }
+
+            return result;
         }
 
         public User GetById(int userId)
         {
-            throw new System.NotImplementedException();
+            return _dalFactory.User.GetById(userId);
         }
 
         public void Add(UserDto user)
         {
-            throw new System.NotImplementedException();
+            User result = _mapper.Map<UserDto, User>(user);
+            _dalFactory.User.Add(result);
         }
 
         public void Update(UserDto user)
         {
-            throw new System.NotImplementedException();
+            User result = _mapper.Map<UserDto, User>(user);
+            _dalFactory.User.UpdateVoid(result, result.Id);
         }
 
         public void Delete(int userId)
         {
-            throw new System.NotImplementedException();
+            User user = _context.Users.FirstOrDefault(x => x.Id == userId);
+            _dalFactory.User.Delete(user);
+            _context.SaveChanges();
         }
     }
 }

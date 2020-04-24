@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using BLL.Interface;
 using BLL.ModelDto;
@@ -23,27 +24,46 @@ namespace BLL.Repository
 
         public List<CarDto> GetAll()
         {
-            throw new System.NotImplementedException();
+            List<CarDto> result = new List<CarDto>();
+            var allCars = _dalFactory.Car.GetAll().Include(ord => ord.Order).ToList();
+            foreach (var car in allCars)
+            {
+                result.Add(new CarDto
+                {
+                    Id = car.Id,
+                    Model = car.Model,
+                    Mark = car.Mark,
+                    ClassCar = car.ClassCar,
+                    DateManufacture = car.DateManufacture,
+                    NumberRegistration = car.NumberRegistration
+                });
+            }
+
+            return result;
         }
 
         public Car GetById(int carId)
         {
-            throw new System.NotImplementedException();
+            return _dalFactory.Car.GetById(carId);
         }
 
         public void Add(CarDto car)
         {
-            throw new System.NotImplementedException();
+            Car result = _mapper.Map<CarDto, Car>(car);
+            _dalFactory.Car.Add(result);
         }
 
         public void Update(CarDto car)
         {
-            throw new System.NotImplementedException();
+            Car result = _mapper.Map<CarDto, Car>(car);
+            _dalFactory.Car.UpdateVoid(result, result.Id);
         }
 
         public void Delete(int carId)
         {
-            throw new System.NotImplementedException();
+            Car car = _context.Cars.FirstOrDefault(x => x.Id == carId);
+            _dalFactory.Car.Delete(car);
+            _context.SaveChanges();
         }
     }
 }
